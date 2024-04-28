@@ -15,6 +15,7 @@ class MyModule(Module):
         # Type 2, user data
         self.data = 25
 
+
         # Type 3. another Module
         self.sub_module = OtherModule()
 
