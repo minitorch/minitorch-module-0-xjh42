@@ -173,7 +173,7 @@ def zipWith(
         ret = []
         if len(arr1) != len(arr2):
             raise IndexError("{arr1} and {arr2} length dismatch")
-        for a, b in arr1, arr2:
+        for a, b in zip(arr1, arr2):
             ret.append(fn(a, b))
         return ret
     return zip_fn
@@ -201,20 +201,20 @@ def reduce(
          fn(x_1, x_0)))`
     """
     def reduce_fn(arr: Iterable[float]) -> float:
-        ret = 0.0
+        ret = start
         for x in arr:
-            ret = fn(x, fn(start))
+            ret = fn(x, ret)
         return ret
     return reduce_fn
 
 
 def sum(ls: Iterable[float]) -> float:
     "Sum up a list using `reduce` and `add`."
-    apply = reduce(add)
+    apply = reduce(add, 0.0)
     return apply(ls)
 
 
 def prod(ls: Iterable[float]) -> float:
     "Product of a list using `reduce` and `mul`."
-    apply = reduce(mul)
+    apply = reduce(mul, 1.0)
     return apply(ls)
